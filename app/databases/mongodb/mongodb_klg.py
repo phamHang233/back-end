@@ -11,8 +11,6 @@ from app.constants.network_constants import DEFAULT_CREDIT_SCORE, Chain
 from app.constants.search_constants import SearchConstants
 from app.constants.time_constants import TimeConstants
 from app.decorators.time_exe import sync_log_time_exe, TimeExeTag
-from app.services.artifacts.protocols import ProjectCollectorTypes
-from app.services.credit_score_service import CreditScoreService
 from app.utils.list_dict_utils import sort_log
 from app.utils.logger_utils import get_logger
 from app.utils.search_data_utils import get_smart_contract_type

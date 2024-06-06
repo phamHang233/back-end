@@ -41,6 +41,15 @@ class MongoDBDexCollections:
     token_prices = 'token_prices'
 
 
+class NFTMongoDBCollections:
+    nfts = 'dex_nft'
+    configs = 'configs'
+    collectors = 'collectors'
+    ethereum_dex_events = 'ethereum_dex_events'
+    pairs = 'pairs'
+    wallets = 'wallets'
+
+
 class MongoDBContractLabelCollections:
     mapped_projects = 'mapped_projects'
     protocols = 'protocols'

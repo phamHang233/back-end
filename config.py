@@ -31,10 +31,9 @@ class Config:
     # To reorder swagger tags
     raw = {
         'tags': [
-            {'name': 'Common'}, {'name': 'Ranking'}, {'name': 'Entity'},
-            {'name': 'Search'}, {'name': 'Wallet'}, {'name': 'Token'}, {'name': 'NFT'},
-            {'name': 'Lending'}, {'name': 'Cexes'}, {'name': 'Dexes'}, {'name': 'Whales'},
-            {'name': 'Recommend'}, {'name': 'Score'}, {'name': 'CDP'}, {'name': 'Explore Users'}, {'name': 'Social Media'}
+
+            {'name': 'Search'}, {'name': 'Wallet'},  {'name': 'NFT'},
+            {'name': 'Explore Users'}, {'name': "Position"}
         ]
     }
     if SERVER_NAME:
@@ -91,6 +90,10 @@ class ArangoDBGraphConfig:
 class MongoDBConfig:
     CONNECTION_URL = os.getenv("MONGODB_CONNECTION_URL")
     DATABASE = os.getenv('MONGODB_DATABASE', 'knowledge_graph')
+
+class NFTMongoDBConfig:
+    CONNECTION_URL = os.getenv("NFT_MONGODB_CONNECTION_URL")
+    DATABASE = os.getenv('NFT_MONGODB_DATABASE', 'dex_nft_manager')
 
 
 class ScoreArangoConfig:
