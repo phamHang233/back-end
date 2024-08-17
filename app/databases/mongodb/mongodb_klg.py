@@ -110,71 +110,71 @@ class MongoDB:
         projection_statement = self.get_projection_statement(projection)
         return self._projects_col.find({'_id': {'$in': project_ids}}, projection=projection_statement)
 
-    @sync_log_time_exe(tag=TimeExeTag.database)
-    def get_address_project_links(self, chain_id, address):
-        key = f'{chain_id}_{address}'
-        filter_statement = {
-            '$or': [
-                {f'contractAddresses.{key}': {'$exists': True}},
-                {f'tokenAddresses.{chain_id}': address},
-                {f'nftAddresses.{chain_id}': address},
-                {f'walletAddresses.{address}.chains': chain_id}
-            ]
-        }
-        cursor = self._projects_col.find(filter_statement)
-        docs = list(cursor)
-
-        data = {}
-        for doc in docs:
-            sources = doc.get('sources', [])
-            if ProjectCollectorTypes.defi in sources:
-                id_ = doc.get('idDefiLlama')
-                data['defillama'] = f'https://defillama.com/protocol/{id_}'
-            if ProjectCollectorTypes.nft in sources:
-                id_ = doc.get('idOpensea')
-                data['opensea'] = f'https://opensea.io/collection/{id_}'
-            if ProjectCollectorTypes.exchange in sources:
-                id_ = doc.get('idCMC')
-                data['coinmarketcap'] = f'https://coinmarketcap.com/exchanges/{id_}'
-
-        return data
-
-    @sync_log_time_exe(tag=TimeExeTag.database)
-    def get_address_project_links_v2(self, chain_id, address):
-        aggregate_statement = [
-            {
-                '$match': {'address': address}
-            },
-            {
-                "$lookup": {
-                    'from': 'projects',
-                    'localField': 'project',
-                    'foreignField': '_id',
-                    'as': 'projects'
-                }
-            }
-        ]
-        cursor = self._smart_contracts_col.aggregate(aggregate_statement)
-        docs = list(cursor)
-
-        data = {}
-        for doc in docs:
-            if doc['chainId'] != chain_id:
-                continue
-
-            for project in doc.get('projects', []):
-                sources = project.get('sources', [])
-                if ProjectCollectorTypes.defi in sources:
-                    id_ = project.get('idDefiLlama')
-                    data['defillama'] = f'https://defillama.com/protocol/{id_}'
-                if ProjectCollectorTypes.nft in sources:
-                    id_ = project.get('idOpensea')
-                    data['opensea'] = f'https://opensea.io/collection/{id_}'
-                if ProjectCollectorTypes.exchange in sources:
-                    id_ = project.get('idCMC')
-                    data['coinmarketcap'] = f'https://coinmarketcap.com/exchanges/{id_}'
-
-        return data
+    # @sync_log_time_exe(tag=TimeExeTag.database)
+    # def get_address_project_links(self, chain_id, address):
+    #     key = f'{chain_id}_{address}'
+    #     filter_statement = {
+    #         '$or': [
+    #             {f'contractAddresses.{key}': {'$exists': True}},
+    #             {f'tokenAddresses.{chain_id}': address},
+    #             {f'nftAddresses.{chain_id}': address},
+    #             {f'walletAddresses.{address}.chains': chain_id}
+    #         ]
+    #     }
+    #     cursor = self._projects_col.find(filter_statement)
+    #     docs = list(cursor)
+    #
+    #     data = {}
+    #     for doc in docs:
+    #         sources = doc.get('sources', [])
+    #         if ProjectCollectorTypes.defi in sources:
+    #             id_ = doc.get('idDefiLlama')
+    #             data['defillama'] = f'https://defillama.com/protocol/{id_}'
+    #         if ProjectCollectorTypes.nft in sources:
+    #             id_ = doc.get('idOpensea')
+    #             data['opensea'] = f'https://opensea.io/collection/{id_}'
+    #         if ProjectCollectorTypes.exchange in sources:
+    #             id_ = doc.get('idCMC')
+    #             data['coinmarketcap'] = f'https://coinmarketcap.com/exchanges/{id_}'
+    #
+    #     return data
+    #
+    # @sync_log_time_exe(tag=TimeExeTag.database)
+    # def get_address_project_links_v2(self, chain_id, address):
+    #     aggregate_statement = [
+    #         {
+    #             '$match': {'address': address}
+    #         },
+    #         {
+    #             "$lookup": {
+    #                 'from': 'projects',
+    #                 'localField': 'project',
+    #                 'foreignField': '_id',
+    #                 'as': 'projects'
+    #             }
+    #         }
+    #     ]
+    #     cursor = self._smart_contracts_col.aggregate(aggregate_statement)
+    #     docs = list(cursor)
+    #
+    #     data = {}
+    #     for doc in docs:
+    #         if doc['chainId'] != chain_id:
+    #             continue
+    #
+    #         for project in doc.get('projects', []):
+    #             sources = project.get('sources', [])
+    #             if ProjectCollectorTypes.defi in sources:
+    #                 id_ = project.get('idDefiLlama')
+    #                 data['defillama'] = f'https://defillama.com/protocol/{id_}'
+    #             if ProjectCollectorTypes.nft in sources:
+    #                 id_ = project.get('idOpensea')
+    #                 data['opensea'] = f'https://opensea.io/collection/{id_}'
+    #             if ProjectCollectorTypes.exchange in sources:
+    #                 id_ = project.get('idCMC')
+    #                 data['coinmarketcap'] = f'https://coinmarketcap.com/exchanges/{id_}'
+    #
+    #     return data
 
     @sync_log_time_exe(tag=TimeExeTag.database)
     def get_project_by_address(self, address):

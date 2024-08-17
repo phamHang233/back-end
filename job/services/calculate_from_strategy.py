@@ -58,6 +58,7 @@ def calc_fees(data, pool, liquidity, min_range, max_range):
     result = []
 
     for i, d in enumerate(data):
+        price = float(d['close'])
         fg = calc_unbounded_fees_per_unit(int(d['feeGrowthGlobal0X128']), int(data[i - 1]['feeGrowthGlobal0X128']),
                                           int(d['feeGrowthGlobal1X128']), int(data[i - 1]['feeGrowthGlobal1X128']),
                                           pool) if i else [0, 0]
@@ -71,7 +72,7 @@ def calc_fees(data, pool, liquidity, min_range, max_range):
 
         active_liquidity = active_liquidity_for_candle(min_tick, max_tick, low_tick,
                                                        high_tick)  # tính thời gian liquiditity được active
-        tokens = tokens_from_liquidity(float(d['close']), min_range, max_range, liquidity,
+        tokens = tokens_from_liquidity(price, min_range, max_range, liquidity,
                                        int(pool['token0']['decimals']),
                                        int(pool['token1']['decimals']))
         fee_token0 = fg[0] * liquidity * active_liquidity / 100 if i else 0
@@ -90,9 +91,9 @@ def calc_fees(data, pool, liquidity, min_range, max_range):
         # y0 = token_ratio_first_close[0]
 
         # fg_v = fg[0] + (fg[1] * float(d['close'])) if i else 0
-        fee_v = fee_token0 + fee_token1 * float(d['close']) if i else 0
+        fee_v = fee_token0 + fee_token1 * price if i else 0
         # fee_unbound = fee_unb0 + fee_unb1 * float(d['close']) if i else 0
-        amount_v = tokens[0] + tokens[1] * float(d['close'])  ## lượng token investment tại thơi điểm  hiện tại
+        amount_v = tokens[0] + tokens[1] * price  ## lượng token investment tại thơi điểm  hiện tại
         fee_usd = fee_v * float(lastest_record['pool']['totalValueLockedUSD']) / (
                 float(lastest_record['pool']['totalValueLockedToken1']) * float(lastest_record['close'])
                 + float(lastest_record['pool']['totalValueLockedToken0']))
@@ -112,7 +113,7 @@ def calc_fees(data, pool, liquidity, min_range, max_range):
             'amountV': amount_v,
             # 'amountTR': amount_tr,
             'feeUSD': fee_usd,
-            'close': float(d['close']),
+            'close': price,
         }
         daily_data_result.update(d)
         result.append(daily_data_result)
@@ -178,12 +179,11 @@ def pivot_fee_data(amount0, amount1, data):
                 # current_price_tick["percFee"] = (current_price_tick["feeV"] / current_price_tick["amountV"]) * 100 if \
                 # current_price_tick["amountV"] > 0 else 0
                 pivot.append(create_pivot_record(current_date, d))
-
-    token_price = (float(data[-1]['pool']['totalValueLockedUSD'])
-                   / (float(data[-1]['pool']['totalValueLockedToken1']) * float(data[-1]['close'])
-                      + float(data[-1]['pool']['totalValueLockedToken0'])))
-    x = data[::-1]
     price_rate = float(data[-1]['close'])
+    token_price = (float(data[-1]['pool']['totalValueLockedUSD'])
+                   / (float(data[-1]['pool']['totalValueLockedToken1']) * price_rate
+                      + float(data[-1]['pool']['totalValueLockedToken0'])))
+    # x = data[::-1]
     ref_invest = (amount0 * price_rate + amount1) * token_price
     invest_change = (pivot[-1]['amountV'] - ref_invest) * token_price
     apr = (total_fee + invest_change) / ref_invest / 30 * 365
@@ -193,7 +193,8 @@ def pivot_fee_data(amount0, amount1, data):
         'PnL': invest_change,
         'investedAsset': ref_invest,
         'currentInvest': pivot[-1]['amountV'],
-        'fee_apr': total_fee /ref_invest /30 * 365
+        'fee_apr': total_fee /ref_invest /30 * 365,
+        "pivotData": pivot
     }
 
 

@@ -7,26 +7,28 @@ import requests
 def pool_by_id(id, protocol):
     url = URL_PROTOCOL.mapping.get(protocol)
     pool_query_fields = """{
-    id
-    feeTier
-    totalValueLockedUSD
-    totalValueLockedETH
-    token0Price
-    token1Price
-    token0 {
-      id
-      symbol
-      name
-      decimals
-    }
-    token1 {
-      id
-      symbol
-      name
-      decimals
-    }
-  }"""
-    query = "query Pools($id: ID!) { id: pools(where: { id: $id } orderBy:totalValueLockedETH, orderDirection:desc) " + pool_query_fields + "}"
+        id
+        name
+        symbol
+        totalValueLockedUSD
+        cumulativeVolumeUSD
+        rewardTokenEmissionsAmount
+        rewardTokenEmissionsUSD
+        inputTokens {
+            id
+            name
+            symbol
+            decimals
+            lastPriceUSD
+            lastPriceBlockNumber
+        }
+        fees {
+            id
+            feePercentage
+            feeType
+        }
+    }"""
+    query = "query LiquidityPools($id: ID!) { id: liquidityPools(where: { id: $id } ) " + pool_query_fields + "}"
     try:
         response = requests.post(url, json={'query': query, 'variables': {'id': id}})
         data = response.json()

@@ -12,6 +12,6 @@
 #
 #
 # def check_address(address: str):
-#     if not Web3.isAddress(address):
+#     if not Web3.is_address(address):
 #         raise BadRequest(f'Invalid wallet address: {address}')
 #     return address.lower()

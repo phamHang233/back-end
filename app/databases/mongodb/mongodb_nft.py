@@ -23,8 +23,9 @@ class NFTMongoDB:
             logger.exception(f"Failed to connect to ArangoDB: {connection_url}: {e}")
             sys.exit(1)
 
-        self.nfts = self.mongo_db[NFTMongoDBCollections.nfts]
-        self.wallets = self.mongo_db[NFTMongoDBCollections.wallets]
+        self.nfts = self.db[NFTMongoDBCollections.nfts]
+        self.wallets = self.db[NFTMongoDBCollections.wallets]
+        self.pairs = self.db[NFTMongoDBCollections.pairs]
 
     ##############
     ##  WALLET  ##
@@ -35,7 +36,7 @@ class NFTMongoDB:
         return cursor
 
     def get_top_wallets(self):
-        cursor = self.nfts.find({}).sort('apr', pymongo.DESCENDING).limit(20)
+        cursor = self.wallets.find({"chainId": "0x1"}).sort('apr', pymongo.DESCENDING).limit(10)
         return cursor
 
 
@@ -46,6 +47,36 @@ class NFTMongoDB:
         cursor = self.nfts.find({"tokenId": {"$in": keys}})
         return cursor
 
-    def get_top_nfts(self,_limit):
-        cursor = self.nfts.find({}).sort('aprInMonth', pymongo.DESCENDING).limit(_limit)
+    def get_nfts_by_key(self, key):
+        cursor = self.nfts.find_one({"tokenId": key})
         return cursor
+
+    def get_top_nfts(self, address=None):
+        if address:
+
+            cursor = self.nfts.find({"chainId": "0x1", "poolAddress": address.lower()}).sort('aprInMonth',
+                                                                                     pymongo.DESCENDING).limit(20)
+        else:
+            cursor = self.nfts.find({"chainId": "0x1"}).sort('aprInMonth', pymongo.DESCENDING).limit(20)
+        return cursor
+
+    def get_nft_by_ids(self, keys):
+        return list( self.nfts.find({"_id": {"$in": keys}}))
+
+    def get_nft_by_wallet(self, wallet):
+        return self.nfts.find({"wallet": wallet.lower()})
+
+
+    ##############
+    ##  WALLET  ##
+    ##############
+    def get_pair(self, key):
+        try:
+            cursor = self.pairs.find_one({"_id": key})
+            return cursor
+        except Exception as e:
+            logger.exception(e)
+            return None
+
+    def get_all_pair(self):
+        return self.pairs.find({"bestAPR": {"$exists": True}})

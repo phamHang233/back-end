@@ -9,6 +9,9 @@ from sanic_ext import openapi
 
 from app import create_app
 from app.apis import api_v3
+from app.databases.mongodb.mongodb_dex import MongoDBDex
+from app.databases.mongodb.mongodb_klg import MongoDB
+from app.databases.mongodb.mongodb_nft import NFTMongoDB
 
 from app.misc.log import log
 from app.services.cached.cache_calls import CacheCalls
@@ -26,15 +29,15 @@ app.ext.openapi.raw(Config.raw)
 app.blueprint(api_v3)
 
 
-# @app.before_server_start
-# async def setup_db(_):
-#     app.ctx.db = MongoDB()
+@app.before_server_start
+async def setup_db(_):
+    app.ctx.db = MongoDB()
     # log(f'Connected to KLG Database {app.ctx.db.connection_url}')
     #
     # app.ctx.mongo = BlockchainETL(BlockchainETLConfig.TEST_CONNECTION_URL)
     # app.ctx.etl = BlockchainETL(BlockchainETLConfig.CONNECTION_URL)
-    # app.ctx.dex_db = MongoDBDex()
-    #
+    app.ctx.dex_db = MongoDBDex()
+    app.ctx.nft_db = NFTMongoDB()
     # app.ctx.transfer_db = TokenTransferDB()
 
 

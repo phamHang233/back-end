@@ -5,23 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="23151698-b2fe-420b-a793-9a12aa0df973" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/apis/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/apis/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/constants/mongo_constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/constants/mongo_constants.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/databases/mongodb/async_blockchain_etl.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/databases/mongodb/centic_db.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/databases/mongodb/mongodb_auth.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/databases/mongodb/mongodb_cdp.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/databases/mongodb/mongodb_community.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/databases/mongodb/mongodb_dydx.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/apis/initial/create_position.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/apis/initial/create_position.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/apis/nfts/nft_blueprint.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/apis/nfts/nft_blueprint.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/apis/wallets/wallet_blueprint.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/apis/wallets/wallet_blueprint.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/constants/arangodb_graph_constants.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/databases/mongodb/mongodb_dex.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/databases/mongodb/mongodb_dex.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/databases/mongodb/mongodb_klg.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/databases/mongodb/mongodb_klg.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/databases/mongodb/mongodb_label.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/databases/mongodb/mongodb_lending_klg.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/databases/mongodb/mongodb_page_rank.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/databases/mongodb/mongodb_token.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/databases/mongodb/mongodb_nft.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/databases/mongodb/mongodb_nft.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/project.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/utils/encrypt_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/encrypt_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/utils/list_dict_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/list_dict_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/utils/search_data_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/search_data_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/job/algorthisms/average_strategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/job/algorthisms/average_strategy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/job/algorthisms/genetic_algorithms.py" beforeDir="false" afterPath="$PROJECT_DIR$/job/algorthisms/genetic_algorithms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/job/algorthisms/gradient_descent.py" beforeDir="false" afterPath="$PROJECT_DIR$/job/algorthisms/gradient_descent.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/job/constants/network_constant.py" beforeDir="false" afterPath="$PROJECT_DIR$/job/constants/network_constant.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/job/crawlers/uni_pool_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/job/crawlers/uni_pool_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/job/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/job/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/job/services/batch_queries_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/job/services/batch_queries_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/job/services/calculate_from_strategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/job/services/calculate_from_strategy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/job/services/fee_from_strategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/job/services/fee_from_strategy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/job/wallets.py" beforeDir="false" afterPath="$PROJECT_DIR$/job/wallets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test.json" beforeDir="false" afterPath="$PROJECT_DIR$/test/test.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,25 +57,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.create_position.executor&quot;: &quot;Run&quot;,
-    &quot;Python.fee_from_strategy.executor&quot;: &quot;Run&quot;,
-    &quot;Python.genetic_algorithms.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.main (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.test.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/hang/Documents/Study/DATN/back-end&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.complete_search.executor": "Run",
+    "Python.create_position.executor": "Run",
+    "Python.fee_from_strategy.executor": "Run",
+    "Python.genetic_algorithms.executor": "Debug",
+    "Python.main (1).executor": "Debug",
+    "Python.main.executor": "Debug",
+    "Python.test.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/home/hang/Documents/Study/DATN/back-end/app/artifacts/abis",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/artifacts/abis" />
+      <recent name="$PROJECT_DIR$/app/utils" />
+      <recent name="$PROJECT_DIR$/app/services/jobs" />
+      <recent name="$PROJECT_DIR$/job/crawlers" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/app/apis/initial" />
-      <recent name="$PROJECT_DIR$/app/apis/wallets" />
-      <recent name="$PROJECT_DIR$/app/models" />
-      <recent name="$PROJECT_DIR$/app/apis/v3/common" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/apis/overviews" />
@@ -75,6 +85,28 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.main">
+    <configuration name="complete_search" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="back-end" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/job/algorthisms" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/job/algorthisms/complete_search.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="fee_from_strategy" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="back-end" />
       <option name="ENV_FILES" value="" />
@@ -163,42 +195,20 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="back-end" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
         <item itemvalue="Python.main (1)" />
+        <item itemvalue="Python.complete_search" />
         <item itemvalue="Python.fee_from_strategy" />
         <item itemvalue="Python.genetic_algorithms" />
-        <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-48aec45f0201-746f403e7f0c-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.17011.127" />
+        <option value="bundled-python-sdk-975db3bf15a3-31b6be0877a2-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.18034.82" />
       </set>
     </attachedChunks>
   </component>
@@ -222,9 +232,49 @@
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/job/algorthisms/complete_search.py</url>
+          <line>52</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/job/crawlers/uni_pool_data_v2.py</url>
+          <line>35</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/job/algorthisms/gradient_descent.py</url>
+          <line>74</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/job/algorthisms/gradient_descent.py</url>
+          <line>84</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/job/algorthisms/average_strategy.py</url>
+          <line>36</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/apis/wallets/wallet_blueprint.py</url>
+          <line>66</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/apis/wallets/wallet_blueprint.py</url>
+          <line>63</line>
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/apis/nfts/nft_blueprint.py</url>
+          <line>36</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/app/apis/initial/create_position.py</url>
-          <line>50</line>
-          <option name="timeStamp" value="29" />
+          <line>213</line>
+          <option name="timeStamp" value="44" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

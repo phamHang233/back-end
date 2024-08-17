@@ -48,6 +48,8 @@ def _filter_timestamp_in_range(logs: dict, t, v, last_timestamp, frequency):
 
     return last_timestamp
 
+def all_equal(array):
+    return (not array) or (array.count(array[0]) == len(array))
 
 def _fill_margin(logs: dict, start_time, end_time, fill_start_value, pre_value, end_timestamp):
     if (start_time not in logs) and fill_start_value and (pre_value is not None):

@@ -20,7 +20,7 @@ def get_w3(chain_id) -> Web3:
 
 def is_address(chain_id, address):
     w3 = get_w3(chain_id)
-    return w3.isAddress(address)
+    return w3.is_address(address)
 
 
 def return_data(type_search, data):
@@ -62,7 +62,7 @@ def get_smart_contract_type(smart_contract):
 @sync_log_time_exe(tag=TimeExeTag.blockchain)
 def is_contract(chain_id, address):
     w3 = get_w3(chain_id)
-    code = w3.eth.getCode(w3.toChecksumAddress(address))
+    code = w3.eth.getCode(w3.to_checksum_address(address))
     code_str = code.hex()
     if code_str == '0x':
         return False

@@ -3,7 +3,7 @@ import time
 
 from job.services.calculate_from_strategy import tokens_for_strategy, liquidity_for_strategy, calc_fees, pivot_fee_data
 from job.crawlers.uni_pool_data import pool_by_id, get_pool_hour_data
-from job.utils.sqrt_price_math import get_token_amount_of_user, convert_price_to_tick
+from job.utils.sqrt_price_math import get_token_amount_of_user, convert_price_to_tick, convert_tick_to_price
 
 
 def uniswap_strategy_backtest(pool, investment_amount, min_range, max_range, protocol, start_timestamp,
@@ -42,8 +42,8 @@ def uniswap_strategy_algorithm(backtest_data, pool_data, investment_amount, min_
     entry_price = float(backtest_data[0]['close'])
     decimals0 = int(pool_data['token0']['decimals'])
     decimals1 = int(pool_data['token1']['decimals'])
-    max_range = 1/(1.0001 ** min_tick * 10 ** (decimals0 - decimals1))
-    min_range = 1/(1.0001 ** max_tick * 10 ** (decimals0 - decimals1))
+    max_range = convert_tick_to_price(min_tick, decimals0, decimals1)
+    min_range = convert_tick_to_price(max_tick, decimals0, decimals1)
     amount0, amount1 = tokens_for_strategy(
         min_range=min_range, max_range=max_range, investment_amount=investment_amount, price=entry_price,
         decimals=decimals1 - decimals0)

@@ -1,38 +1,49 @@
 from query_state_lib.base.mappers.eth_call_mapper import EthCall
 from query_state_lib.base.utils.encoder import encode_eth_call_data
-from web3 import Web3
+from web3 import Web3, contract
 
 from job.utils.logger_utils import get_logger
 
 logger = get_logger('Batch queries')
+w3 = Web3()
+
 
 
 def add_rpc_call(abi, fn_name, contract_address, block_number=None, fn_paras=None, list_rpc_call=None,
-                 list_call_id=None):
+                 list_call_id=None, call_id=None):
     args = []
     if fn_paras is not None:
         if type(fn_paras) is list:
             args = fn_paras
         else:
-            if Web3.isAddress(fn_paras):
-                fn_paras = Web3.toChecksumAddress(fn_paras)
+            if Web3.is_address(fn_paras):
+                fn_paras = Web3.to_checksum_address(fn_paras)
             args = [fn_paras]
 
-        call_id = f"{fn_name}_{contract_address}_{fn_paras}_{block_number}".lower()
+        if call_id is None:
+            call_id = f"{fn_name}_{contract_address}_{fn_paras}_{block_number}".lower()
     else:
-        call_id = f"{fn_name}_{contract_address}_{block_number}".lower()
+        if call_id is None:
+            call_id = f"{fn_name}_{contract_address}_{block_number}".lower()
 
-    data_call = encode_eth_call_data(abi=abi, fn_name=fn_name, args=args)
+    if call_id in list_call_id:
+        return
+
+    c = contract.Contract
+    c.w3 = w3
+    c.abi = abi
+    data_call = c.encodeABI(fn_name=fn_name, args=args)
+
     if block_number:
-        eth_call = EthCall(to=Web3.toChecksumAddress(contract_address), block_number=block_number, data=data_call,
+        eth_call = EthCall(to=Web3.to_checksum_address(contract_address), block_number=block_number, data=data_call,
                            abi=abi, fn_name=fn_name, id=call_id)
     else:
-        eth_call = EthCall(to=Web3.toChecksumAddress(contract_address), data=data_call,
+        eth_call = EthCall(to=Web3.to_checksum_address(contract_address), data=data_call,
                            abi=abi, fn_name=fn_name, id=call_id)
 
-    if call_id not in list_call_id:
-        list_rpc_call.append(eth_call)
-        list_call_id.append(call_id)
+    list_rpc_call.append(eth_call)
+    list_call_id.append(call_id)
+
 
 
 def decode_data_response(data_responses, list_call_id):

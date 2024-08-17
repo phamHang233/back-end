@@ -124,26 +124,28 @@ class MongoDBDex:
             filter_statement = {'_id': {'$in': keys}}
             cursor = self._pairs_col.find(filter=filter_statement, projection=['chainId', 'address', 'project', 'tokens'], batch_size=batch_size)
 
-            data = []
+            data = {}
             for doc in cursor:
                 assets = []
                 for token in doc['tokens']:
                     assets.append({
                         'address': token['address'],
                         'amount': token.get('liquidityAmount', 0),
-                        'valueInUSD': token.get('liquidityValueInUSD', 0)
+                        'valueInUSD': token.get('liquidityValueInUSD', 0),
+                        'symbol': token.get('symbol')
+
                     })
 
-                data.append({
+                data[doc["address"]] = {
                     'address': doc['address'],
                     'chainId': doc['chainId'],
                     'project': doc['project'],
                     'assets': assets
-                })
+                }
             return data
         except Exception as ex:
             logger.exception(ex)
-        return []
+        return {}
 
     @sync_log_time_exe(tag=TimeExeTag.database)
     def get_pair_assets(self, key):
@@ -158,14 +160,17 @@ class MongoDBDex:
                 assets.append({
                     'address': token['address'],
                     'amount': token.get('liquidityAmount', 0),
-                    'valueInUSD': token.get('liquidityValueInUSD', 0)
+                    'valueInUSD': token.get('liquidityValueInUSD', 0),
+                    'decimals': token.get("decimals"),
+                    'symbol': token.get('symbol')
                 })
 
             return {
+                'tick': doc.get('tick'),
                 'address': doc['address'],
                 'chainId': doc['chainId'],
                 'project': doc['project'],
-                'assets': assets
+                'assets': assets,
             }
         except Exception as ex:
             logger.exception(ex)
